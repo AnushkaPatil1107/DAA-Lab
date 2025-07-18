@@ -1,0 +1,66 @@
+#include <stdio.h>
+
+void read(int a[], int n) {
+    printf("Enter %d elements : ", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
+    }
+}
+
+void bubbleSort(int a[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+ if (a[j] > a[j + 1]) {
+  int temp = a[j];
+ a[j] = a[j + 1];
+     a[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void display(int a[], int n) {
+    printf("After sorting the elements are : ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+}
+
+int binarySearch(int a[], int low, int high, int key) {
+    if (low <= high) {
+    int mid = (low + high) / 2;
+    if (a[mid] == key)
+     return mid;
+     else if (key < a[mid])
+       return binarySearch(a, low, mid - 1, key);
+     else
+      return binarySearch(a, mid + 1, high, key);
+    }
+    return -1;
+}
+
+int main() {
+int n, key, pos;
+printf("Enter value of n : ");
+scanf("%d", &n);
+
+int a[100];
+
+read(a, n);
+ bubbleSort(a, n);
+ display(a, n);
+
+  printf("Enter key element : ");
+  scanf("%d", &key);
+
+   pos = binarySearch(a, 0, n - 1, key);
+
+
+  if (pos != -1)
+    printf("The given key element %d is found at position : %d\n", key, pos);
+   else
+   printf("The given key element %d is not found\n", key);
+
+   return 0;
+}
